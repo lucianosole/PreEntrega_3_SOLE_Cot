@@ -110,13 +110,13 @@ function buscarVehiculo(id){
 function cotizar(cuotas,id) {
     const busqueda = buscarVehiculo(id);
     let resultado = (((((cuotas/12)*45)/100)*busqueda[0].precio)+busqueda[0].precio);
-    
-
+   
     Swal.fire({
-        icon: 'error',
-        title: mensaje,
-        text: resultado,
+        icon: 'success',
+        title: (busqueda[0].marca) + ' ' + (busqueda[0].modelo) + ' Plan de ' + cuotas +' cuotas',
+        text: cuotas + ' cuotas de $: ' + Math.round(resultado/cuotas) + ' Monto final $ :' + resultado,
       })
 
+      document.getElementById("autos").innerHTML = "";
       return resultado;
 }
