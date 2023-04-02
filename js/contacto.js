@@ -7,7 +7,7 @@ class Contacto {
     }
 }
 
-const arrayContacto = [];
+const arrayContacto = JSON.parse(localStorage.getItem("consulta")) || [];
 
 formulario.addEventListener("submit", (e)=>{
 
@@ -17,10 +17,14 @@ formulario.addEventListener("submit", (e)=>{
     const telefono = document.getElementById ("telefono");
     const mensaje = document.getElementById ("mensaje");
 
-    const contacto = new Contacto (nombre.value, email.value, telefono.value, mensaje.value);
-
-    arrayContacto.push(contacto);
-    localStorage.setItem("consuta",JSON.stringify(arrayContacto));
-    Swal.fire('Su mensaje ha sido enviado')
-    formulario.reset();
+    if ((nombre.value === "") || (email.value === "") || (telefono.value === "") || (mensaje.value === "" )) {
+        Swal.fire('Debe completar todos los campos correctamente.')    
+    } else {
+        const contacto = new Contacto (nombre.value, email.value, telefono.value, mensaje.value);
+        arrayContacto.push(contacto);
+        localStorage.setItem("consuta",JSON.stringify(arrayContacto));
+        Swal.fire('Su mensaje ha sido enviado')
+        formulario.reset();
+    }
+    
 })

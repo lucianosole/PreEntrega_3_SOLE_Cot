@@ -56,7 +56,7 @@ for (const marca of marcas) {
     <div class="card-body text-center">
       <h5 class="card-title">${marca}</h5>
       <p class="card-text">Elija su unidad.</p>
-      <a href="#" onclick="renderAutos()" class="btn btn-primary">seleccionar</a>
+      <a href="#" onclick="renderAutos('${marca}')" class="btn btn-primary">seleccionar</a>
     </div>
   </div>`
 }
@@ -74,11 +74,12 @@ function cargarAutos() {
     return JSON.parse(localStorage.getItem("autos")) || [];
 }
 
-function renderAutos() {
+function renderAutos(opcion) {
     const productos = cargarAutos();
     let salida = "";
     
     for (producto of productos) {
+        if (producto.marca === opcion){
         salida += `<div class="col-md-4 my-3">
             <div class="card text-center border-0">
                 <img src="${producto.imagen}" alt="${producto.marca} ${producto.modelo}" class="card-img-top" />
@@ -95,7 +96,8 @@ function renderAutos() {
                     </div>
                 </div>
             </div>
-        </div>`;
+        </div>`
+        }
     }
 
     document.getElementById("autos").innerHTML = salida;
